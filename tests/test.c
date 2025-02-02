@@ -37,7 +37,52 @@ Test(adcs, null)
     cr_assert_eq(status, NULL_PTR_ERR);
 }
 
-Test(adcdataunion, arbitrary)
+Test(adcs, basic_1)
+{
+    populateAdcData((unsigned int[]){4095, 0, 0, 0, 0, 0});
+    ComputationStatus_t status = Adcs_ComputeSunVector(&adcData, &sunVector);
+    cr_assert_eq(status, SUCCESS);
+    cr_assert_float_eq(sunVector.x, 1.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.y, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.z, 0.0f, FLT_TOL);
+
+    populateAdcData((unsigned int[]){0, 4095, 0, 0, 0, 0});
+    status = Adcs_ComputeSunVector(&adcData, &sunVector);
+    cr_assert_eq(status, SUCCESS);
+    cr_assert_float_eq(sunVector.x, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.y, 1.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.z, 0.0f, FLT_TOL);
+
+    populateAdcData((unsigned int[]){0, 0, 4095, 0, 0, 0});
+    status = Adcs_ComputeSunVector(&adcData, &sunVector);
+    cr_assert_eq(status, SUCCESS);
+    cr_assert_float_eq(sunVector.x, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.y, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.z, 1.0f, FLT_TOL);
+
+    populateAdcData((unsigned int[]){0, 0, 0, 4095, 0, 0});
+    status = Adcs_ComputeSunVector(&adcData, &sunVector);
+    cr_assert_eq(status, SUCCESS);
+    cr_assert_float_eq(sunVector.x, -1.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.y, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.z, 0.0f, FLT_TOL);
+
+    populateAdcData((unsigned int[]){0, 0, 0, 0, 4095, 0});
+    status = Adcs_ComputeSunVector(&adcData, &sunVector);
+    cr_assert_eq(status, SUCCESS);
+    cr_assert_float_eq(sunVector.x, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.y, -1.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.z, 0.0f, FLT_TOL);
+
+    populateAdcData((unsigned int[]){0, 0, 0, 0, 0, 4095});
+    status = Adcs_ComputeSunVector(&adcData, &sunVector);
+    cr_assert_eq(status, SUCCESS);
+    cr_assert_float_eq(sunVector.x, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.y, 0.0f, FLT_TOL);
+    cr_assert_float_eq(sunVector.z, -1.0f, FLT_TOL);
+}
+
+Test(adcdataunion, arbitrary_1)
 {
     AdcData_t testAdcData;
     for (int i = 0; i < 6; i++)
@@ -53,7 +98,7 @@ Test(adcdataunion, arbitrary)
     cr_assert_eq(testAdcData.components.minus_z, 50);
 }
 
-Test(adcs, arbitrary_1)
+Test(adcs, arbitrary_2)
 {
     populateAdcData((unsigned int []){1808, 2711, 20, 10, 12, 2480});
     ComputationStatus_t status = Adcs_ComputeSunVector(&adcData, &sunVector);
@@ -64,7 +109,7 @@ Test(adcs, arbitrary_1)
     cr_assert_float_eq(sunVector.z, -0.605858359974, FLT_TOL);
 }
 
-Test(adcs, arbitrary_2)
+Test(adcs, arbitrary_3)
 {
     populateAdcData((unsigned int []){2739, 102, 3043, 10, 12, 14});
     ComputationStatus_t status = Adcs_ComputeSunVector(&adcData, &sunVector);
@@ -75,7 +120,7 @@ Test(adcs, arbitrary_2)
     cr_assert_float_eq(sunVector.z, 0.743066106927, FLT_TOL);
 }
 
-Test(adcs, arbitrary_3)
+Test(adcs, arbitrary_4)
 {
     populateAdcData((unsigned int []){13, 205, 14, 4084, 10, 204});
     ComputationStatus_t status = Adcs_ComputeSunVector(&adcData, &sunVector);
