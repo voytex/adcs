@@ -1,5 +1,3 @@
-
-
 #ifndef _ADCS_H
 #define _ADCS_H
 

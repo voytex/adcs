@@ -12,8 +12,8 @@ $(OBJ_DIR)/adcs.o: adcs.c
 
 test: $(OBJ_DIR)/adcs.o
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $(BIN_DIR)/test $< tests/test.c $(TESTFLAGS)
-	@$(BIN_DIR)/test --verbose
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/test tests/test.c $< $(TESTFLAGS)
+	./$(BIN_DIR)/test --verbose > ./tests/test_$(shell date +%Y-%m-%d-%H-%M-%S).txt 2>&1
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
