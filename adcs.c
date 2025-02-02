@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <float.h>
 #include "adcs.h"
 
 
 static float quantizedToFloat(unsigned int val) 
 {
+    // Assuming that: 
+    //    0.1 V -> val == 0x0000
+    //    3.2 V -> val == 0x0FFF
     return (float)val / (float)ADC_MAX;
 }
 
