@@ -1,7 +1,7 @@
 #include <criterion/criterion.h>
 #include "../adcs.h"
 
-#define FLT_TOL (0.01)
+#define FLT_TOL (0.001)
 
 AdcData_t adcData;
 SunVector_t sunVector;

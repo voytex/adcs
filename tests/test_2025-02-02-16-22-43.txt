@@ -1,0 +1,18 @@
+[----] Criterion v2.4.2
+[====] Running 1 test from adcdataunion:
+[====] Running 6 tests from adcs:
+[RUN ] adcs::arbitrary_3
+[RUN ] adcs::arbitrary_2
+[RUN ] adcs::eclipse
+[RUN ] adcdataunion::arbitrary_1
+[RUN ] adcs::basic_1
+[RUN ] adcs::arbitrary_4
+[RUN ] adcs::null
+[PASS] adcs::arbitrary_3: (0.00s)
+[PASS] adcs::eclipse: (0.00s)
+[PASS] adcdataunion::arbitrary_1: (0.00s)
+[PASS] adcs::arbitrary_2: (0.00s)
+[PASS] adcs::null: (0.00s)
+[PASS] adcs::basic_1: (0.00s)
+[PASS] adcs::arbitrary_4: (0.00s)
+[====] Synthesis: Tested: 7 | Passing: 7 | Failing: 0 | Crashing: 0 

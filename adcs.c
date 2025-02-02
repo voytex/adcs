@@ -3,7 +3,7 @@
 #include "adcs.h"
 
 
-static float quantizedToFloat(unsigned int val) 
+static inline float quantizedToFloat(unsigned int val) 
 {
     // Assuming that: 
     //    0.1 V -> val == 0x0000
@@ -25,6 +25,12 @@ static bool detectEclipse(AdcData_t *pAdcData)
 }
 
 
+static inline float computeComponent(unsigned int plus, unsigned int minus) 
+{
+    return plus >= minus ? quantizedToFloat(plus) : -quantizedToFloat(minus);
+}
+
+
 ComputationStatus_t Adcs_ComputeSunVector(AdcData_t *pAdcData, SunVector_t *pSunVector) 
 {
     if ((NULL == pAdcData) || (NULL == pSunVector)) 
@@ -38,8 +44,8 @@ ComputationStatus_t Adcs_ComputeSunVector(AdcData_t *pAdcData, SunVector_t *pSun
     }
 
     AdcPhotodiodesData_t *pComponents = &pAdcData->components;
-    pSunVector->x = quantizedToFloat(pComponents->plus_x) - quantizedToFloat(pComponents->minus_x);
-    pSunVector->y = quantizedToFloat(pComponents->plus_y) - quantizedToFloat(pComponents->minus_y);
-    pSunVector->z = quantizedToFloat(pComponents->plus_z) - quantizedToFloat(pComponents->minus_z);
+    pSunVector->x = computeComponent(pComponents->plus_x, pComponents->minus_x);
+    pSunVector->y = computeComponent(pComponents->plus_y, pComponents->minus_y);
+    pSunVector->z = computeComponent(pComponents->plus_z, pComponents->minus_z);
     return SUCCESS;
 }
