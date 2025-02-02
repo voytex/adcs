@@ -39,18 +39,18 @@ Test(adcs, null)
 
 Test(adcdataunion, arbitrary)
 {
-    AdcData_t adcData;
-    for (int i = 0; i < 7; i++)
+    AdcData_t testAdcData;
+    for (int i = 0; i < 6; i++)
     {
-        adcData.array[i] = i * 10;
+        testAdcData.array[i] = i * 10;
     }
 
-    cr_assert_eq(adcData.components.plus_x, 0);
-    cr_assert_eq(adcData.components.plus_y, 10);
-    cr_assert_eq(adcData.components.plus_z, 20);
-    cr_assert_eq(adcData.components.minus_x, 30);
-    cr_assert_eq(adcData.components.minus_y, 40);
-    cr_assert_eq(adcData.components.minus_z, 50);
+    cr_assert_eq(testAdcData.components.plus_x, 0);
+    cr_assert_eq(testAdcData.components.plus_y, 10);
+    cr_assert_eq(testAdcData.components.plus_z, 20);
+    cr_assert_eq(testAdcData.components.minus_x, 30);
+    cr_assert_eq(testAdcData.components.minus_y, 40);
+    cr_assert_eq(testAdcData.components.minus_z, 50);
 }
 
 Test(adcs, arbitrary_1)
