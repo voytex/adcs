@@ -37,6 +37,22 @@ Test(adcs, null)
     cr_assert_eq(status, NULL_PTR_ERR);
 }
 
+Test(adcdataunion, arbitrary)
+{
+    AdcData_t adcData;
+    for (int i = 0; i < 7; i++)
+    {
+        adcData.array[i] = i * 10;
+    }
+
+    cr_assert_eq(adcData.components.plus_x, 0);
+    cr_assert_eq(adcData.components.plus_y, 10);
+    cr_assert_eq(adcData.components.plus_z, 20);
+    cr_assert_eq(adcData.components.minus_x, 30);
+    cr_assert_eq(adcData.components.minus_y, 40);
+    cr_assert_eq(adcData.components.minus_z, 50);
+}
+
 Test(adcs, arbitrary_1)
 {
     populateAdcData((unsigned int []){1808, 2711, 20, 10, 12, 2480});
